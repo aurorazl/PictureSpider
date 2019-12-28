@@ -8,7 +8,7 @@ import scrapy
 import os
 import shutil
 from scrapy.exceptions import DropItem
-from scrapy.contrib.pipeline.images import ImagesPipeline
+from scrapy.pipelines.images import ImagesPipeline
 from scrapy.utils.project import get_project_settings
 
 class PicturespiderPipeline(ImagesPipeline):
