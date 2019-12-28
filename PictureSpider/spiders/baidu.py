@@ -14,13 +14,12 @@ from PictureSpider.logger import set_logger
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='gb18030')
 
 Index = 0
-Total_num = 3000
+Total_num = 50000
 set_logger("baidu", logging.INFO)
 
 class BaiduSpider(scrapy.Spider):
     name = 'baidu'
     allowed_domains = ['image.baidu.com']
-    start_urls = ['https://image.baidu.com/search/flip?tn=baiduimage&ie=utf-8&word=%E5%AE%89%E5%85%A8%E5%B8%BD&pn=0&gsm=78&ct=&ic=0&lm=-1&width=0&height=0']
     url_begin = "https://image.baidu.com/search/flip?tn=baiduimage&ie=utf-8&word="
     default_headers = {
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
