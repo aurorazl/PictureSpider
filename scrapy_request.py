@@ -3,9 +3,9 @@
 import re
 import sys
 import urllib.parse
-
+import hashlib
 import requests
-
+import os
 
 def getPage(keyword, page, n):
     page = page * n
@@ -27,23 +27,27 @@ def get_onepage_urls(onepageurl):
 
 def down_pic(pic_urls):
     """给出图片链接列表, 下载所有图片"""
-    for i, pic_url in enumerate(pic_urls):
+    for pic_url in pic_urls:
         try:
             pic = requests.get(pic_url, timeout=15)
-            string = pic_url.split("/")[-1]
-            global total_number
-            with open(string, 'wb') as f:
+            sha1 = hashlib.sha1()
+            sha1.update(pic_url.encode('utf-8'))
+            hashcode = sha1.hexdigest()
+            global total_number,fail_number
+            with open(os.path.join("images",hashcode), 'wb') as f:
                 f.write(pic.content)
                 print('成功下载第%s张图片: %s' % (total_number, str(pic_url)))
                 total_number+=1
         except Exception as e:
-            print('下载第%s张图片时失败: %s' % (str(i + 1), str(pic_url)))
+            print('下载第%s张图片时失败: %s' % (str(fail_number), str(pic_url)))
+            fail_number += 1
             print(e)
             continue
 
 
 if __name__ == '__main__':
     total_number = 0
+    fail_number = 0
     page_begin = 0
     page_number = 30
     image_number = 3

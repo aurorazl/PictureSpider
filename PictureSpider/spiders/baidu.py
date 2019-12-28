@@ -20,6 +20,8 @@ set_logger("baidu", logging.INFO)
 
 def get_image_number():
     img_store = get_project_settings().get('IMAGES_STORE')
+    if not os.path.exists(img_store + "/" + "helmet"):
+        os.makedirs(img_store + "/" + "helmet",exist_ok=True)
     return len(os.listdir(img_store + "/" + "helmet"))
 
 class BaiduSpider(scrapy.Spider):
@@ -53,14 +55,16 @@ class BaiduSpider(scrapy.Spider):
         for url,title in pic_content:
             item_obj = BaiduItem(title=str(Index),href=url,save_prefix="helmet")
             Index +=1
-            if get_image_number() < Index:
+            if get_image_number() > Index:
                 break
             yield item_obj
 
         if Total_num < Index:
             id_list = Selector(response=response).xpath('//div[@id="page"]/a/@href').extract()
+            if not id_list:
+                logging.info("==================== not id_list\n")
             for one in id_list:
-                if get_image_number()<Index:
+                if get_image_number()>Index:
                     break
                 logging.info("begin crawl page: {}".format("https://image.baidu.com" + one))
                 yield Request(url="https://image.baidu.com" + one, callback=self.parse, headers=self.default_headers)

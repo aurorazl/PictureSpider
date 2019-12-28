@@ -34,10 +34,9 @@ class PicturespiderPipeline(ImagesPipeline):
             os.makedirs(img_path,True)
         if not os.path.exists(self.img_store+"/"+image_path[0]):
             return
-        shutil.move(self.img_store+"/"+image_path[0],img_path+"/"+item["title"] + '.jpg')
+        shutil.move(self.img_store+"/"+image_path[0],img_path+"/"+image_path[0].split("/")[-1])
         return item
 
 class Pipeline(object):
-
     def process_item(self, item, spider):
         pass
