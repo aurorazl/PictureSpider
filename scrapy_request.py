@@ -34,12 +34,14 @@ def down_pic(pic_urls):
             sha1.update(pic_url.encode('utf-8'))
             hashcode = sha1.hexdigest()
             global total_number,fail_number
-            with open(os.path.join("images",hashcode), 'wb') as f:
+            if os.path.exists(os.path.join("images",hashcode+".jpg")):
+                continue
+            with open(os.path.join("images",hashcode+".jpg"), 'wb') as f:
                 f.write(pic.content)
                 print('成功下载第%s张图片: %s' % (total_number, str(pic_url)))
                 total_number+=1
         except Exception as e:
-            print('下载第%s张图片时失败: %s' % (str(fail_number), str(pic_url)))
+            print('下载图片第%s次失败: %s' % (str(fail_number), str(pic_url)))
             fail_number += 1
             print(e)
             continue
@@ -58,9 +60,10 @@ if __name__ == '__main__':
                    "夜间 施工","雷雨 施工","警察 鹅毛大雪","警察 严寒","警察 站岗 雪地","棒球帽 雨天","毛帽 工人",
                    "雷雨 抢修","洪水 抢修","洪水 电力"
     ]
-    while total_number<10000:
+    while 1:
         for keyword in all_keyword:
             url = getPage(keyword, page_begin, page_number)
             onepage_urls = get_onepage_urls(url)
             down_pic(onepage_urls)
         page_begin += 1
+        print("the {} times".format(page_begin))

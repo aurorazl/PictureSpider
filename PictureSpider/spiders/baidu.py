@@ -53,7 +53,9 @@ class BaiduSpider(scrapy.Spider):
         global Index
         pic_content = re.findall('{.*?"objURL":\s*"(.*?)",.*?"fromPageTitle":\s*"(.*?)".*?}',response.text,re.S)
         if not pic_content:
-            logging.info("get no pic_content")
+            logging.info("get no pic_content {}".format(response.text))
+        else:
+            logging.info("get pic_content {}".format(len(pic_content)))
         for url,title in pic_content:
             item_obj = BaiduItem(title=str(Index),href=url,save_prefix="helmet")
             Index +=1
@@ -65,7 +67,9 @@ class BaiduSpider(scrapy.Spider):
         if get_image_number() < Total_num:
             id_list = Selector(response=response).xpath('//div[@id="page"]/a/@href').extract()
             if not id_list:
-                logging.info("==================== not id_list\n")
+                logging.info("==================== not id_list {}".format(response.text))
+            else:
+                logging.info("get id_list {}".format(len(id_list)))
             for one in id_list:
                 if get_image_number()>Total_num:
                     logging.info("current num is {},quit".format(get_image_number()))
