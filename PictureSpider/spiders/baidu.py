@@ -52,6 +52,8 @@ class BaiduSpider(scrapy.Spider):
     def parse(self, response):
         global Index
         pic_content = re.findall('{.*?"objURL":\s*"(.*?)",.*?"fromPageTitle":\s*"(.*?)".*?}',response.text,re.S)
+        if not pic_content:
+            logging.info("get no pic_content")
         for url,title in pic_content:
             item_obj = BaiduItem(title=str(Index),href=url,save_prefix="helmet")
             Index +=1
@@ -60,7 +62,7 @@ class BaiduSpider(scrapy.Spider):
                 break
             yield item_obj
 
-        if Total_num < Total_num:
+        if get_image_number() < Total_num:
             id_list = Selector(response=response).xpath('//div[@id="page"]/a/@href').extract()
             if not id_list:
                 logging.info("==================== not id_list\n")
