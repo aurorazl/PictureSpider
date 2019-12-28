@@ -56,6 +56,7 @@ class BaiduSpider(scrapy.Spider):
             item_obj = BaiduItem(title=str(Index),href=url,save_prefix="helmet")
             Index +=1
             if get_image_number() > Total_num:
+                logging.info("current num is {},quit".format(get_image_number()))
                 break
             yield item_obj
 
@@ -65,6 +66,7 @@ class BaiduSpider(scrapy.Spider):
                 logging.info("==================== not id_list\n")
             for one in id_list:
                 if get_image_number()>Total_num:
+                    logging.info("current num is {},quit".format(get_image_number()))
                     break
                 logging.info("begin crawl page: {}".format("https://image.baidu.com" + one))
                 yield Request(url="https://image.baidu.com" + one, callback=self.parse, headers=self.default_headers)
