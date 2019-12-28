@@ -7,6 +7,7 @@ import sys
 import io
 import re
 import logging
+import os
 from PictureSpider.items import BaiduItem
 from scrapy.utils.project import get_project_settings
 from PictureSpider.logger import set_logger
@@ -16,6 +17,10 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='gb18030')
 Index = 0
 Total_num = 50000
 set_logger("baidu", logging.INFO)
+
+def get_image_number():
+    img_store = get_project_settings().get('IMAGES_STORE')
+    return len(os.listdir(img_store + "/" + "helmet"))
 
 class BaiduSpider(scrapy.Spider):
     name = 'baidu'
@@ -48,14 +53,14 @@ class BaiduSpider(scrapy.Spider):
         for url,title in pic_content:
             item_obj = BaiduItem(title=str(Index),href=url,save_prefix="helmet")
             Index +=1
-            if Total_num < Index:
+            if get_image_number() < Index:
                 break
             yield item_obj
 
         if Total_num < Index:
             id_list = Selector(response=response).xpath('//div[@id="page"]/a/@href').extract()
             for one in id_list:
-                if Total_num<Index:
+                if get_image_number()<Index:
                     break
                 logging.info("begin crawl page: {}".format("https://image.baidu.com" + one))
                 yield Request(url="https://image.baidu.com" + one, callback=self.parse, headers=self.default_headers)
