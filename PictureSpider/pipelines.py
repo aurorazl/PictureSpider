@@ -24,7 +24,7 @@ class PicturespiderPipeline(ImagesPipeline):
     }
     def get_media_requests(self, item, info):
         img_url = item['href']
-        yield  scrapy.Request(img_url, headers=self.default_headers)
+        yield  scrapy.Request(img_url, headers=self.default_headers,meta={'item': item,})
 
     # def item_completed(self, results, item, info):
     #     image_path = [x['path'] for ok, x in results if ok]  # ok判断是否下载成功
@@ -40,8 +40,9 @@ class PicturespiderPipeline(ImagesPipeline):
     #     return item
 
     def file_path(self, request, response=None, info=None):
+        item = request.meta['item']
         image_guid = hashlib.sha1(to_bytes(request.url)).hexdigest()
-        return 'helmet_bing/%s.jpg' % (image_guid)
+        return '{}/{}.jpg'.format(item["save_prefix"],image_guid)
 
 class Pipeline(object):
     def process_item(self, item, spider):
