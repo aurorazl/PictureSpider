@@ -50,6 +50,6 @@ class SinaSpider(scrapy.Spider):
         #     item_obj = BingItem(href=url_path, save_prefix="helmet_sina")
         #     yield item_obj
 
-        logging.info(response.text)# 翻页
+        logging.info(response.text)# 翻页找不到，需要滚动
         next_content = re.findall(r'<.*?page.*?>', response.text, re.S)
         print(next_content)

@@ -68,8 +68,8 @@ class WeiboSpider(scrapy.Spider):
         "Upgrade-Insecure-Requests":1,
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
     }
-    cookie = "_s_tentry=gl.ali213.net; UOR=gl.ali213.net,widget.weibo.com,www.howtoing.com; login_sid_t=99adeb40c85314559f6ee27d85c6f289; cross_origin_proto=SSL; Apache=425584148259.2815.1577595064696; SINAGLOBAL=425584148259.2815.1577595064696; ULV=1577595064704:1:1:1:425584148259.2815.1577595064696:; un=dragon0486@163.com; wvr=6; SCF=AguUrz2aOzj6aiKJhuVtR80rMWc5WaBk4DEu4fA0ueqo9Y-vfiCWNcQjcQHuVcDllLZoD9v6STIkNOfyXywxBG0.; SUB=_2A25zDCIjDeRhGeRG71IR8ifPyj6IHXVQeBTrrDV8PUNbmtAfLVX5kW9NUgurfxRxnfnunDO6Gt0_GUSu_R96wOES; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WhYmq3C-xkW9MRrIH1nbCWm5JpX5K2hUgL.FozRSh57eo.0eKz2dJLoIpjLxK-L1KeL1h2LxK-LBonL12eLxKBLBonLBoqt; SUHB=0h1Irx3w-2C_Rv; ALF=1609139699; SSOLoginState=1577603699; secsys_id=2ce88653d2afbc8451f64cc14476bd09; WBStorage=42212210b087ca50|undefined; webim_unReadCount=%7B%22time%22%3A1577607574098%2C%22dm_pub_total%22%3A0%2C%22chat_group_client%22%3A0%2C%22allcountNum%22%3A0%2C%22msgbox%22%3A0%7D"
-    cookie = stringToDict(cookie)
+    # cookie = "_s_tentry=gl.ali213.net; UOR=gl.ali213.net,widget.weibo.com,www.howtoing.com; login_sid_t=99adeb40c85314559f6ee27d85c6f289; cross_origin_proto=SSL; Apache=425584148259.2815.1577595064696; SINAGLOBAL=425584148259.2815.1577595064696; ULV=1577595064704:1:1:1:425584148259.2815.1577595064696:; un=dragon0486@163.com; wvr=6; SCF=AguUrz2aOzj6aiKJhuVtR80rMWc5WaBk4DEu4fA0ueqo9Y-vfiCWNcQjcQHuVcDllLZoD9v6STIkNOfyXywxBG0.; SUB=_2A25zDCIjDeRhGeRG71IR8ifPyj6IHXVQeBTrrDV8PUNbmtAfLVX5kW9NUgurfxRxnfnunDO6Gt0_GUSu_R96wOES; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WhYmq3C-xkW9MRrIH1nbCWm5JpX5K2hUgL.FozRSh57eo.0eKz2dJLoIpjLxK-L1KeL1h2LxK-LBonL12eLxKBLBonLBoqt; SUHB=0h1Irx3w-2C_Rv; ALF=1609139699; SSOLoginState=1577603699; secsys_id=2ce88653d2afbc8451f64cc14476bd09; WBStorage=42212210b087ca50|undefined; webim_unReadCount=%7B%22time%22%3A1577607574098%2C%22dm_pub_total%22%3A0%2C%22chat_group_client%22%3A0%2C%22allcountNum%22%3A0%2C%22msgbox%22%3A0%7D"
+    # cookie = stringToDict(cookie)
     main_keyword = ['军人', '城市工人', '警察', '工人', '施工', '站岗', '洪水', '抢修', '军训', '工地', '洪涝', '电力', "教官"]
     second_keyword = ['冬季', '冬天', '夜间', '水利', '暴雨', '参观', '遮阳帽', '变电站', '绒毛帽', '雨天', '鸭舌帽', '旅游', '雪地', '毛帽', '南网',
                       '草帽', '雷雨',
@@ -80,7 +80,7 @@ class WeiboSpider(scrapy.Spider):
         for j in second_keyword:
             total_keyword.append(i + " " + j)
 
-    # cookie = get_cookie_from_login_sina_com_cn("dragon0486@163.com","long0486.")
+    cookie = get_cookie_from_login_sina_com_cn("dragon0486@163.com","long0486.")
     if not cookie:
         logging.error("\nuser login fail,existing!!\n")
         exit(0)
