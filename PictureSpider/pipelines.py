@@ -20,6 +20,7 @@ class PicturespiderPipeline(ImagesPipeline):
         'accept-encoding': 'gzip, deflate, sdch, br',
         'accept-language': 'zh-CN,zh;q=0.8,en;q=0.6',
         'cookie': 'bid=yQdC/AzTaCw',
+        "Referer": "https://s.weibo.com/weibo?q=%E6%8A%A2%E4%BF%AE%20%E5%8D%97%E7%BD%91&nodup=1&Refer=SWeibo_box",
         'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
     }
     def get_media_requests(self, item, info):
