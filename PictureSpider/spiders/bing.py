@@ -49,5 +49,5 @@ class BingSpider(scrapy.Spider):
         current_index += 60
         if current_index<max_num:
             for one in self.total_keyword:
-                crawl_url = "https://cn.bing.com/images/async?q=" + one + "&first={}&count={}&relp=60&lostate=r&mmasync=1"
+                crawl_url = "https://cn.bing.com/images/async?q=" + one + "&first={}&count={}&relp=60&lostate=r&mmasync=1".format(current_index,current_index+60)
                 yield Request(url=crawl_url, callback=self.parse, headers=self.default_headers)
