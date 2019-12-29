@@ -46,9 +46,9 @@ class BingSpider(scrapy.Spider):
             item_obj = BingItem(href=json.loads(one).get("murl"), save_prefix="helmet_bing")
             yield item_obj
 
-        # global current_index
-        # current_index += 60
-        # if current_index<max_num:
-        #     for one in self.total_keyword:
-        #         crawl_url = "https://cn.bing.com/images/async?q=" + one + "&first={}&count={}&relp=60&lostate=r&mmasync=1".format(current_index,current_index+60)
-        #         yield Request(url=crawl_url, callback=self.parse, headers=self.default_headers)
+        global current_index
+        current_index += 60
+        if current_index<max_num:
+            for one in self.total_keyword:
+                crawl_url = "https://cn.bing.com/images/async?q=" + one + "&first={}&count={}&relp=60&lostate=r&mmasync=1".format(current_index,current_index+60)
+                yield Request(url=crawl_url, callback=self.parse, headers=self.default_headers)
