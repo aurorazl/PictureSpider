@@ -42,9 +42,17 @@ class BaiduSpider(scrapy.Spider):
                    "绒毛帽 城市工人", "草帽 城市工人", "鸭舌帽 雨天", "草帽 旅游", "鸭舌帽 旅游", "军训 教官", "军人 雪地",
                    "夜间 施工", "雷雨 施工", "警察 鹅毛大雪", "警察 严寒", "警察 站岗 雪地", "棒球帽 雨天", "毛帽 工人",
                    "雷雨 抢修", "洪水 抢修", "洪水 电力"
-                   ]
+                   ]#38
+    main_keyword = ['军人', '城市工人', '警察', '工人', '施工', '站岗', '洪水', '抢修', '军训', '工地', '洪涝', '电力', "教官"]
+    second_keyword = ['冬季', '冬天', '夜间', '水利', '暴雨', '参观', '遮阳帽', '变电站', '绒毛帽', '雨天', '鸭舌帽', '旅游', '雪地', '毛帽', '南网', '草帽', '雷雨',
+           '棒球帽', '严寒', '鹅毛大雪', '照明']
+    total_keyword = []
+    for i in main_keyword:
+        total_keyword.append(i)
+        for j in second_keyword:
+            total_keyword.append(i+" "+j)
     def start_requests(self):
-        for one in self.all_keyword:
+        for one in self.total_keyword:
             crawl_url = self.url_begin +one+ "&pn=" + str(1) + "&gsm=" + str(hex(1)) + \
                         "&ct=&ic=0&lm=-1&width=0&height=0"
             yield Request(url=crawl_url, callback=self.parse,headers=self.default_headers)
@@ -57,7 +65,7 @@ class BaiduSpider(scrapy.Spider):
         else:
             logging.info("get pic_content {}".format(len(pic_content)))
         for url,title in pic_content:
-            item_obj = BaiduItem(title=str(Index),href=url,save_prefix="helmet")
+            item_obj = BaiduItem(title=str(Index),href=url,save_prefix="helmet_combinations")
             Index +=1
             if get_image_number() > Total_num:
                 logging.info("current num is {},quit".format(get_image_number()))
