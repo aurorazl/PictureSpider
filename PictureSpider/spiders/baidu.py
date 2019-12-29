@@ -52,7 +52,7 @@ class BaiduSpider(scrapy.Spider):
         for j in second_keyword:
             total_keyword.append(i+" "+j)
     def start_requests(self):
-        for one in self.total_keyword:
+        for one in self.total_keyword[:1]:
             crawl_url = self.url_begin +one+ "&pn=" + str(1) + "&gsm=" + str(hex(1)) + \
                         "&ct=&ic=0&lm=-1&width=0&height=0"
             yield Request(url=crawl_url, callback=self.parse,headers=self.default_headers)

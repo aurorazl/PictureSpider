@@ -1,14 +1,5 @@
 
-import itertools
-li =['冬季', '绒毛帽', '雪地', '变电站', '照明', '严寒', '军人', '施工', '暴雨', '站岗', '城市工人',
-     '鹅毛大雪', '水利', '雷雨', '洪水', '棒球帽', '警察', '抢修', '草帽', '旅游', '军训', '教官', '冬天',
-     '毛帽', '工地', '夜间', '参观', '雨天', '南网', '洪涝', '遮阳帽', '鸭舌帽', '电力', '工人'
-     ]
-main_keyword = ['军人','城市工人','警察','工人','施工','站岗','洪水','抢修','军训','工地','洪涝','电力',"教官"]
-second_keyword = ['冬季', '冬天', '夜间', '水利', '暴雨', '参观', '遮阳帽', '变电站', '绒毛帽', '雨天', '鸭舌帽', '旅游', '雪地', '毛帽', '南网', '草帽', '雷雨', '棒球帽', '严寒', '鹅毛大雪', '照明']
-total_keyword = []
-for i in main_keyword:
-    total_keyword.append(i)
-    for j in second_keyword:
-        total_keyword.append(i + " " + j)
-print(total_keyword)
+import requests
+
+res = requests.get("https://cn.bing.com/images/async?q=%E7%BE%8E%E5%A5%B3&first=0&count=35&relp=35&lostate=r&mmasync=1&dgState=x*175_y*848_h*199_c*1_i*106_r*0")
+print(res.text)

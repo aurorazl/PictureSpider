@@ -39,13 +39,13 @@ CONCURRENT_REQUESTS_PER_IP = 16
 #TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-DEFAULT_REQUEST_HEADERS = {
-   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-   'Accept-Encoding': 'gzip, deflate, sdch, br',
-   'Accept-Language': 'zh-CN,zh;q=0.8,en;q=0.6',
-   'Cache-Control': 'max-age=0',
-   'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
-}
+# DEFAULT_REQUEST_HEADERS = {
+#    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+#    'Accept-Encoding': 'gzip, deflate, sdch, br',
+#    'Accept-Language': 'zh-CN,zh;q=0.8,en;q=0.6',
+#    'Cache-Control': 'max-age=0',
+#    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
+# }
 
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
@@ -96,4 +96,4 @@ IMAGES_STORE = 'images'
 DOWNLOAD_TIMEOUT = 10
 LOG_LEVEL = "INFO"
 DEPTH_PRIORITY = 0
-LOG_FILE = './spider.log'
+# LOG_FILE = './spider.log'

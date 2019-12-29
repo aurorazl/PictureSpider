@@ -12,3 +12,7 @@ class BaiduItem(scrapy.Item):
     title = scrapy.Field()
     href = scrapy.Field()
     save_prefix = scrapy.Field()
+
+class BingItem(scrapy.Item):
+    href = scrapy.Field()
+    save_prefix = scrapy.Field()
